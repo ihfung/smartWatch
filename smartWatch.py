@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
 
+
 data = pd.read_csv("dailyActivity_merged.csv") # Load the dataset which is the csv file
 print("The dataset has been loaded successfully!") # Display a message to confirm that the dataset has been loaded successfully
 print(data.head()) # Display the first few rows of the dataset
@@ -35,3 +36,13 @@ print("\n")
 
 print("Descriptive statistics of the dataset:")
 print(data.describe()) # Display the descriptive statistics of the dataset
+print("\n")
+
+print("Relationship between calories burned and the total steps walked in a day:")
+print("Displaying the graph in browser...")
+# Now I will plot a graph with the x-axis representing the "ActivityDate" column and the y-axis representing the "TotalSteps" column: 
+figure = px.scatter(data_frame = data, x="Calories", y="TotalSteps", size="VeryActiveMinutes", trendline="ols", title="Relationship between Calories & Total Steps") #scatter is a function used to plot the graph
+#size is for the circle size in the graph of the scatter plot
+#trendline is for the linear regression line in the graph
+figure.show() # Display the graph
+print("\n")
