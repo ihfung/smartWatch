@@ -46,3 +46,25 @@ figure = px.scatter(data_frame = data, x="Calories", y="TotalSteps", size="VeryA
 #trendline is for the linear regression line in the graph
 figure.show() # Display the graph
 print("\n")
+
+#average total number of active minutes in a day:
+print("Pie graph showing average total number of active minutes in a day:")
+print("Displaying the graph in browser...")
+label = ["Very Active Minutes", "Fairly Active Minutes", 
+         "Lightly Active Minutes", "Inactive Minutes"]
+counts = data[["VeryActiveMinutes", "FairlyActiveMinutes", 
+               "LightlyActiveMinutes", "SedentaryMinutes"]].mean()
+colors = ['purple','green', "red", "blue"]
+
+fig = go.Figure(data=[go.Pie(labels=label, values=counts)])
+fig.update_layout(title_text='Total Active Minutes')
+fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=30,
+                  marker=dict(colors=colors, line=dict(color='black', width=3)))
+fig.show()
+print("\n")
+
+#observations of the data
+# 81.3% of Total inactive minutes in a day
+# 15.8% of Lightly active minutes in a day
+# On an average, only 21 minutes (1.74%) were very active
+# and 1.11% (13 minutes) of fairly active minutes in a day
