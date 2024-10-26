@@ -50,17 +50,14 @@ print("\n")
 #average total number of active minutes in a day:
 print("Pie graph showing average total number of active minutes in a day:")
 print("Displaying the graph in browser...")
-label = ["Very Active Minutes", "Fairly Active Minutes", 
-         "Lightly Active Minutes", "Inactive Minutes"]
-counts = data[["VeryActiveMinutes", "FairlyActiveMinutes", 
-               "LightlyActiveMinutes", "SedentaryMinutes"]].mean()
+label = ["Very Active Minutes", "Fairly Active Minutes", "Lightly Active Minutes", "Inactive Minutes"]
+counts = data[["VeryActiveMinutes", "FairlyActiveMinutes", "LightlyActiveMinutes", "SedentaryMinutes"]].mean() #mean() function is used to calculate the average of the columns
 colors = ['purple','green', "red", "blue"]
 
-fig = go.Figure(data=[go.Pie(labels=label, values=counts)])
-fig.update_layout(title_text='Total Active Minutes')
-fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=30,
-                  marker=dict(colors=colors, line=dict(color='black', width=3)))
-fig.show()
+fig = go.Figure(data=[go.Pie(labels=label, values=counts)]) #Pie is a function used to plot the graph and Figure is used to display the graph
+fig.update_layout(title_text='Total Active Minutes') #update_layout is used to update the layout of the graph
+fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=30, marker=dict(colors=colors, line=dict(color='black', width=3))) #update_traces is used to update the traces of the graph
+fig.show() # Display the graph
 print("\n")
 
 #observations of the data
