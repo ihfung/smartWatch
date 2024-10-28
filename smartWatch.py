@@ -65,3 +65,62 @@ print("\n")
 # 15.8% of Lightly active minutes in a day
 # On an average, only 21 minutes (1.74%) were very active
 # and 1.11% (13 minutes) of fairly active minutes in a day
+
+
+print("We transformed the data type of the ActivityDate column to the datetime column above. Let’s use it to find the weekdays of the records and add a new column to this dataset as “Day”:")
+data["Day"] = data["ActivityDate"].dt.day_name() #dt.day_name() function is used to get the day name of the date
+print(data["Day"].head()) # Display the first few rows of the "Day" column
+print("\n")
+
+
+print("Very active, fairly active, and lightly active minutes on each day of the week:")
+print("Displaying the graph in browser...")
+
+fig = go.Figure()
+fig.add_trace(go.Bar(
+    x=data["Day"],
+    y=data["VeryActiveMinutes"],
+    name='Very Active',
+    marker_color='purple'
+))
+fig.add_trace(go.Bar(
+    x=data["Day"],
+    y=data["FairlyActiveMinutes"],
+    name='Fairly Active',
+    marker_color='green'
+))
+fig.add_trace(go.Bar(
+    x=data["Day"],
+    y=data["LightlyActiveMinutes"],
+    name='Lightly Active',
+    marker_color='pink'
+))
+fig.update_layout(barmode='group', xaxis_tickangle=-45)
+fig.show()
+
+print("\n")
+
+print("Number of inactive minutes on each day of the week:")
+day = data["Day"].value_counts() #value_counts() function is used to count the number of unique values in the "Day" column
+label = day.index #index is used to get the index of the day
+counts = data["SedentaryMinutes"]
+colors = ['gold','lightgreen', "pink", "blue", "skyblue", "cyan", "orange"]
+
+fig = go.Figure(data=[go.Pie(labels=label, values=counts)])
+fig.update_layout(title_text='Inactive Minutes Daily') #update_layout is used to update the layout of the graph
+fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=30, marker=dict(colors=colors, line=dict(color='black', width=3)))
+fig.show()
+print("\n")
+
+print("Number of calories burned on each day of the week:")
+calories = data["Day"].value_counts()
+label = calories.index
+counts = data["Calories"]
+colors = ['gold','lightgreen', "pink", "blue", "skyblue", "cyan", "orange"]
+
+fig = go.Figure(data=[go.Pie(labels=label, values=counts)])
+fig.update_layout(title_text='Calories Burned Daily')
+fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=30, marker=dict(colors=colors, line=dict(color='black', width=3)))
+fig.show()
+
+#Tuesday is, therefore, one of the most active days for all individuals in the dataset, as the highest number of calories were burned on Tuesdays.
